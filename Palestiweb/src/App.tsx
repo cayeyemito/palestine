@@ -7,7 +7,9 @@ import flagImg from "@/assets/img/flag.png"
 import palestinaWar from "@/assets/img/palestinawar.webp"
 import kidPalestina from "@/assets/img/kidpalestina.jpg"
 import mani from "@/assets/img/mani.jpg"
-import { Facebook, Twitter, Instagram } from "lucide-react" 
+import { Facebook, Twitter, Instagram } from "lucide-react"
+import MyChart from "@/components/victory";
+import Page from "@/components/bbdd"
 
 import {
   Dialog,
@@ -255,6 +257,12 @@ export default function App() {
               </Dialog>
             </ItemActions>
           </Item>
+        </div>
+        <div className="mt-10 max-w-4xl mx-auto">
+          <MyChart/>
+        </div>
+        <div className="mt-10 max-w-4xl mx-auto">
+          <Page/>
         </div>
       </main>
     </div>
