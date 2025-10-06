@@ -25,13 +25,13 @@ function Page() {
 
   return (
     <div>
-      <ul>
-        {users.map((user: any) => (
-          <li key={user.id}>
-            {user.name || user.username || user.email || JSON.stringify(user)}
-          </li>
-        ))}
-      </ul>
+        <ul>
+            {users.map((user: any) => (
+                <li key={user.email}>
+                    {user.nombre} {user.apellidos} ({user.email})
+                </li>
+            ))}
+        </ul>
     </div>
   )
 }
