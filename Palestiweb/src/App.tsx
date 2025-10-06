@@ -43,8 +43,13 @@ function Switch({
 export { Switch }
 
 export default function App() {
-  const { setTheme } = useTheme()
-  const [isDark, setIsDark] = React.useState(false) // estado del switch
+  const { theme, setTheme } = useTheme()
+  const [isDark, setIsDark] = React.useState(false)
+
+  React.useEffect(() => {
+    // Inicializa el switch según el tema actual
+    setIsDark(theme === "dark")
+  }, [theme])
 
   return (
     <div className="min-h-screen flex flex-col gap-8 bg-background text-foreground transition-colors">
