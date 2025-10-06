@@ -86,13 +86,13 @@ export default function App() {
             </h1>
           </div>
         </div>
-        <div className="flex w-full max-w-6xl flex-row justify-center gap-6 flex-wrap mx-auto mt-10">
+        <div className="flex w-full max-w-6xl flex-row justify-center gap-6 flex-wrap mx-auto mt-20">
           <Item
             variant="outline"
             className="flex flex-col items-start justify-start h-auto min-h-fit p-6 w-90"
           >
             <ItemContent className="flex flex-col gap-2 text-left">
-              <ItemTitle className="w-full flex justify-center">Una crisis humanitaria sin precedentes</ItemTitle>
+              <ItemTitle className="w-full text-center text-lg">Una crisis humanitaria sin precedentes</ItemTitle>
               <img
                 src={palestinaWar}
                 alt="Familias palestinas bajo el asedio"
@@ -103,7 +103,11 @@ export default function App() {
               </ItemDescription>
             </ItemContent>
             <ItemActions className="w-full flex justify-center">
-              <Button variant="outline" size="sm">
+              <Button size="sm" className={isDark 
+                  ? "bg-white text-black border-white"
+                  : "bg-black text-white border-black"
+                }
+              >
                 Ver cifras reales
               </Button>
             </ItemActions>
@@ -114,7 +118,7 @@ export default function App() {
             className="flex flex-col items-start justify-start h-auto min-h-fit p-6 w-90"
           >
             <ItemContent className="flex flex-col gap-2 text-left">
-              <ItemTitle className="w-full flex justify-center">Historias que el mundo no debería ignorar</ItemTitle>
+              <ItemTitle className="w-full text-center text-lg">Historias que el mundo no debería ignorar</ItemTitle>
               <img
                 src={kidPalestina}
                 alt="Familias palestinas bajo el asedio"
@@ -123,7 +127,11 @@ export default function App() {
               <ItemDescription className="line-clamp-none leading-relaxed">Niños, madres y ancianos resisten día a día en medio de la devastación. Sus testimonios nos recuerdan que detrás de cada número hay una vida, una historia, un sueño roto que merece ser contado.</ItemDescription>
             </ItemContent>
             <ItemActions className="w-full flex justify-center">
-              <Button variant="outline" size="sm">
+              <Button size="sm" className={isDark 
+                  ? "bg-white text-black border-white"
+                  : "bg-black text-white border-black"
+                }
+              >
                 Leer testimonios
               </Button>
             </ItemActions>
@@ -134,7 +142,7 @@ export default function App() {
             className="flex flex-col items-start justify-start h-auto min-h-fit p-6 w-90"
           >
             <ItemContent className="flex flex-col gap-2 text-left">
-              <ItemTitle className="w-full flex justify-center">Tu voz puede marcar la diferencia</ItemTitle>
+              <ItemTitle className="w-full text-center text-lg">Tu voz realmente puede marcar la diferencia</ItemTitle>
               <img
                 src={mani}
                 alt="Familias palestinas bajo el asedio"
@@ -143,7 +151,11 @@ export default function App() {
               <ItemDescription className="line-clamp-none leading-relaxed">Informarte, compartir, donar o exigir a tus representantes que se pronuncien. Cada gesto cuenta. La indiferencia también mata — el silencio no puede ser una opción.</ItemDescription>
             </ItemContent>
             <ItemActions className="w-full flex justify-center">
-              <Button variant="outline" size="sm">
+              <Button size="sm" className={isDark 
+                  ? "bg-white text-black border-white"
+                  : "bg-black text-white border-black"
+                }
+              >
                 Cómo ayudar
               </Button>
             </ItemActions>
