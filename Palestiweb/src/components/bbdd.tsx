@@ -6,20 +6,22 @@ function Page() {
 
   useEffect(() => {
     async function getUsers() {
-      const { data, error } = await supabase.from('User').select('*')
+        const { data, error } = await supabase.from('User').select('*')
 
-      if (error) {
+        if (error) {
         console.error('Error al obtener usuarios:', error)
         return
-      }
+        }
 
-      if (data && data.length > 0) {
+        console.log("📦 Datos obtenidos desde Supabase:", data)
+
+        if (data && data.length > 0) {
         setUsers(data)
-      }
+        }
     }
 
     getUsers()
-  }, [])
+    }, [])
 
   return (
     <div>
