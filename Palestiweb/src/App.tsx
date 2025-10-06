@@ -263,6 +263,7 @@ export default function App() {
         </div>
         <div className="mt-10 max-w-4xl mx-auto">
           <Page/>
+          <h1></h1>
         </div>
       </main>
     </div>
