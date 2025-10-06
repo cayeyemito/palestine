@@ -2,29 +2,32 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../../utils/supabase'
 
 function Page() {
-  const [todos, setTodos] = useState<any[]>([])
+  const [users, setUsers] = useState<any[]>([])
 
   useEffect(() => {
-    async function getTodos() {
-      const { data: todos, error } = await supabase.from('todos').select()
+    async function getUsers() {
+      const { data, error } = await supabase.from('User').select('*')
+
       if (error) {
-        console.error(error)
+        console.error('Error al obtener usuarios:', error)
         return
       }
 
-      if (todos && todos.length > 0) {
-        setTodos(todos)
+      if (data && data.length > 0) {
+        setUsers(data)
       }
     }
 
-    getTodos()
+    getUsers()
   }, [])
 
   return (
     <div>
       <ul>
-        {todos.map((todo: any) => (
-          <li key={todo.id}>{todo.task || JSON.stringify(todo)}</li>
+        {users.map((user: any) => (
+          <li key={user.id}>
+            {user.name || user.username || user.email || JSON.stringify(user)}
+          </li>
         ))}
       </ul>
     </div>
