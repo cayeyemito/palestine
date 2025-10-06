@@ -3,7 +3,10 @@ import { useTheme } from "@/components/theme-provider"
 import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { Button } from "@/components/ui/button"
-import palestinaWar from '@/assets/img/palestinawar.webp'
+import flagImg from "@/assets/img/flag.png"
+import palestinaWar from "@/assets/img/palestinawar.webp"
+import kidPalestina from "@/assets/img/kidpalestina.jpg"
+import mani from "@/assets/img/mani.jpg"
 
 import {
   Item,
@@ -62,7 +65,7 @@ export default function App() {
         <div className="relative w-full h-[60vh] mt-[6.8vh]">
           <img
             className="w-full h-full object-cover"
-            src="/src/assets/img/flag.png"
+            src={flagImg}
             alt="Flag"
           />
           <div className="absolute inset-0 flex items-center justify-center text-center px-5 z-20">
@@ -108,7 +111,7 @@ export default function App() {
             <ItemContent className="flex flex-col gap-2 text-left">
               <ItemTitle className="w-full flex justify-center">Historias que el mundo no debería ignorar</ItemTitle>
               <img
-                src="/src/assets/img/kidpalestina.jpg"
+                src={kidPalestina}
                 alt="Familias palestinas bajo el asedio"
                 className="aspect-square w-full rounded-sm object-cover rounded-md border border-border"
               />
@@ -128,7 +131,7 @@ export default function App() {
             <ItemContent className="flex flex-col gap-2 text-left">
               <ItemTitle className="w-full flex justify-center">Tu voz puede marcar la diferencia</ItemTitle>
               <img
-                src="/src/assets/img/mani.jpg"
+                src={mani}
                 alt="Familias palestinas bajo el asedio"
                 className="aspect-square w-full rounded-sm object-cover rounded-md border border-border"
               />
