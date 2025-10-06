@@ -1,23 +1,16 @@
 import { Moon, Sun } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { useTheme } from "@/components/theme-provider"
-import { Calendar } from "@/components/ui/calendar"
 import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button" 
+
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "@/components/ui/item"
 
 import { cn } from "@/lib/utils"
 
@@ -47,13 +40,6 @@ export { Switch }
 
 export default function App() {
   const { setTheme } = useTheme()
-  const [dropdown, setDropdown] =
-    React.useState<React.ComponentProps<typeof Calendar>["captionLayout"]>(
-      "dropdown"
-    )
-  const [date, setDate] = React.useState<Date | undefined>(
-    new Date(2025, 5, 12)
-  )
   const [isDark, setIsDark] = React.useState(false) // estado del switch
 
   return (
@@ -71,64 +57,89 @@ export default function App() {
         />
         <Moon className="h-5 w-5" />
       </header>
-
-      {/* Espacio debajo del header */}
-      <div className="h-16" />
-
       <main className="relative w-full h-full">
-        <div className="absolute top-0 left-0 w-1/2 h-1/2">
-          <img className="w-full h-full object-cover" src="/src/img/flag.jpg" alt="" />
-        </div>
-        {/*<div className="flex flex-col gap-8 w-full max-w-xs mx-auto">
-          <Calendar
-            mode="single"
-            defaultMonth={date}
-            selected={date}
-            onSelect={setDate}
-            captionLayout={dropdown}
-            className={cn(
-              "rounded-lg border p-4 w-full",
-              isDark
-                ? "shadow-[0_4px_6px_rgba(255,0,0,0.5)]"
-                : "shadow-[0_4px_6px_rgba(59,130,246,0.2)]"
-            )}
+        <div className="relative w-full h-[60vh] mt-[6.8vh]">
+          <img
+            className="w-full h-full object-cover"
+            src="/src/assets/img/flag.png"
+            alt="Flag"
           />
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col items-center gap-6 w-full max-w-xs mx-auto">
-              <Label htmlFor="dropdown" className="px-1 text-center">
-                Dropdown
-              </Label>
-
-              <Select
-                value={dropdown}
-                onValueChange={(value) =>
-                  setDropdown(
-                    value as React.ComponentProps<typeof Calendar>["captionLayout"]
-                  )
-                }
-              >
-                <SelectTrigger
-                  id="dropdown"
-                  size="sm"
-                  className="bg-background w-full text-center"
-                >
-                  <SelectValue placeholder="Dropdown" />
-                </SelectTrigger>
-                <SelectContent align="center">
-                  <SelectItem className="text-center" value="dropdown">
-                    Month and Year
-                  </SelectItem>
-                  <SelectItem className="text-center" value="dropdown-months">
-                    Month Only
-                  </SelectItem>
-                  <SelectItem className="text-center" value="dropdown-years">
-                    Year Only
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="absolute inset-0 flex items-center justify-center text-center px-5 z-20">
+            <h1
+              className={`font-display font-bold transition-colors duration-300
+              text-2xl sm:text-3xl md:text-5xl lg:text-8xl
+              ${isDark 
+                ? "text-white drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]" 
+                : "text-black drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"} 
+                fade-in-up`}
+            >
+              La indiferencia también mata.
+            </h1>
           </div>
-        </div>*/}
+        </div>
+        <div className="flex w-full max-w-6xl flex-row justify-center gap-6 flex-wrap mx-auto mt-10">
+          <Item
+            variant="outline"
+            className="flex flex-col items-start justify-start h-auto min-h-fit p-6 w-90"
+          >
+            <ItemContent className="flex flex-col gap-2 text-left">
+              <ItemTitle className="w-full flex justify-center">Una crisis humanitaria sin precedentes</ItemTitle>
+              <img
+                src="/src/assets/img/palestinawar.webp"
+                alt="Familias palestinas bajo el asedio"
+                className="aspect-square w-full rounded-sm object-cover rounded-md border border-border"
+              />
+              <ItemDescription className="line-clamp-none leading-relaxed">
+                Miles de vidas civiles están en riesgo. Familias enteras viven bajo el asedio, sin acceso seguro a agua, electricidad o atención médica. Lo que ocurre en Palestina no es un conflicto lejano: es una violación continua de los derechos humanos.
+              </ItemDescription>
+            </ItemContent>
+            <ItemActions className="w-full flex justify-center">
+              <Button variant="outline" size="sm">
+                Ver cifras reales
+              </Button>
+            </ItemActions>
+          </Item>
+
+          <Item
+            variant="outline"
+            className="flex flex-col items-start justify-start h-auto min-h-fit p-6 w-90"
+          >
+            <ItemContent className="flex flex-col gap-2 text-left">
+              <ItemTitle className="w-full flex justify-center">Historias que el mundo no debería ignorar</ItemTitle>
+              <img
+                src="/src/assets/img/kidpalestina.jpg"
+                alt="Familias palestinas bajo el asedio"
+                className="aspect-square w-full rounded-sm object-cover rounded-md border border-border"
+              />
+              <ItemDescription className="line-clamp-none leading-relaxed">Niños, madres y ancianos resisten día a día en medio de la devastación. Sus testimonios nos recuerdan que detrás de cada número hay una vida, una historia, un sueño roto que merece ser contado.</ItemDescription>
+            </ItemContent>
+            <ItemActions className="w-full flex justify-center">
+              <Button variant="outline" size="sm">
+                Leer testimonios
+              </Button>
+            </ItemActions>
+          </Item>
+
+          <Item
+            variant="outline"
+            className="flex flex-col items-start justify-start h-auto min-h-fit p-6 w-90"
+          >
+            <ItemContent className="flex flex-col gap-2 text-left">
+              <ItemTitle className="w-full flex justify-center">Tu voz puede marcar la diferencia</ItemTitle>
+              <img
+                src="/src/assets/img/mani.jpg"
+                alt="Familias palestinas bajo el asedio"
+                className="aspect-square w-full rounded-sm object-cover rounded-md border border-border"
+              />
+              <ItemDescription className="line-clamp-none leading-relaxed">Informarte, compartir, donar o exigir a tus representantes que se pronuncien. Cada gesto cuenta. La indiferencia también mata — el silencio no puede ser una opción.</ItemDescription>
+            </ItemContent>
+            <ItemActions className="w-full flex justify-center">
+              <Button variant="outline" size="sm">
+                Cómo ayudar
+              </Button>
+            </ItemActions>
+          </Item>
+        </div>
       </main>
     </div>
   )
