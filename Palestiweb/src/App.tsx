@@ -2,7 +2,8 @@ import { Moon, Sun } from "lucide-react"
 import { useTheme } from "@/components/theme-provider"
 import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
-import { Button } from "@/components/ui/button" 
+import { Button } from "@/components/ui/button"
+import palestinaWar from '@/assets/img/palestinawar.webp'
 
 import {
   Item,
@@ -85,7 +86,7 @@ export default function App() {
             <ItemContent className="flex flex-col gap-2 text-left">
               <ItemTitle className="w-full flex justify-center">Una crisis humanitaria sin precedentes</ItemTitle>
               <img
-                src="/src/assets/img/palestinawar.webp"
+                src={palestinaWar}
                 alt="Familias palestinas bajo el asedio"
                 className="aspect-square w-full rounded-sm object-cover rounded-md border border-border"
               />
