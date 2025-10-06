@@ -9,7 +9,7 @@ import kidPalestina from "@/assets/img/kidpalestina.jpg"
 import mani from "@/assets/img/mani.jpg"
 
 export default function App() {
-  const [isDark, setIsDark] = React.useState(false)
+  const [isDark] = React.useState(false)
 
   return (
     <div className="min-h-screen flex flex-col gap-8 bg-background text-foreground transition-colors">
