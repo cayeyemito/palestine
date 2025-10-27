@@ -73,19 +73,7 @@ export function Header() {
 
       {/* Botones a la izquierda */}
       <div className="flex gap-2">
-        {user ? (
-          <>
-            <span className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-800">{user.email}</span>
-            <Button size="sm" className="bg-red-500 text-white" onClick={handleLogout}>
-              Cerrar sesión
-            </Button>
-          </>
-        ) : (
-          <>
-            <AuthDialog type="login" isDark={isDark} />
-            <AuthDialog type="register" isDark={isDark} />
-          </>
-        )}
+        
       </div>
 
       {/* Switch de tema a la derecha */}
