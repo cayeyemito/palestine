@@ -2,11 +2,8 @@ import { Moon, Sun } from "lucide-react"
 import { useTheme } from "@/components/theme-provider"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { cn } from "@/lib/utils"
-import React, { useEffect, useState } from "react"
-import { AuthDialog } from "./AuthDialog"
-import { supabase } from "../../utils/supabase"
-import { Button } from "@/components/ui/button"
- 
+import React, { useState, useEffect } from "react"
+
 function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
   return (
     <SwitchPrimitive.Root
@@ -30,53 +27,16 @@ function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimi
 export function Header() {
   const { theme, setTheme } = useTheme()
   const [isDark, setIsDark] = useState(false)
-  const [user, setUser] = useState<{ email: string } | null>(null)
 
   useEffect(() => {
-  setIsDark(theme === "dark")
-
-  // Obtener la sesión inicial
-  const getUser = async () => {
-    const { data } = await supabase.auth.getSession()
-    if (data.session?.user?.email) {
-      setUser({ email: data.session.user.email })
-    } else {
-      setUser(null)
-    }
-  }
-  getUser()
-
-  // Suscripción a cambios de auth
-  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-    if (session?.user?.email) {
-      setUser({ email: session.user.email })
-    } else {
-      setUser(null)
-    }
-  })
-
-  // Limpiar la suscripción al desmontar
-  return () => {
-    subscription.unsubscribe()
-  }
-}, [theme])
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    setUser(null)
-  }
+    setIsDark(theme === "dark")
+  }, [theme])
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 border-b border-gray-200 dark:border-gray-700
                        bg-background/70 backdrop-blur-md transition-all duration-300
-                       hover:bg-background/100 hover:backdrop-blur-0 flex items-center justify-between p-4">
-
-      {/* Botones a la izquierda */}
-      <div className="flex gap-2">
-        
-      </div>
-
-      {/* Switch de tema a la derecha */}
+                       hover:bg-background/100 hover:backdrop-blur-0 flex items-center justify-end p-4">
+      {/* Switch de tema */}
       <div className="flex items-center gap-2">
         <Sun className="h-5 w-5" />
         <Switch
