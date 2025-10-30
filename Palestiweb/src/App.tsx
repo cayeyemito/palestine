@@ -13,13 +13,25 @@ import Footer from "@/components/footer"
 import palestinaWar from "@/assets/img/palestinawar.webp"
 import kidPalestina from "@/assets/img/kidpalestina.jpg"
 import mani from "@/assets/img/mani.jpg"
+import foto1 from "@/assets/img/foto1.jpg"
+import foto2 from "@/assets/img/foto2.jpg"
+import foto3 from "@/assets/img/foto3.jpg"
+import foto4 from "@/assets/img/foto4.jpg"
+import foto5 from "@/assets/img/foto5.jpg"
+import foto6 from "@/assets/img/foto6.jpg"
+import foto7 from "@/assets/img/foto7.jpg"
+import foto8 from "@/assets/img/foto8.jpg"
+import foto9 from "@/assets/img/foto9.jpg"
+import foto10 from "@/assets/img/foto10.jpg"
+import foto11 from "@/assets/img/foto11.jpg"
+import foto12 from "@/assets/img/foto12.jpg"
 
 export default function App() {
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const [showCharts, setShowCharts] = React.useState(false)
+  const [showTestimonials, setShowTestimonials] = React.useState(false)
 
-  // Ref para el contenedor del contenido que cambia
   const contentRef = useRef<HTMLDivElement | null>(null)
 
   const scrollToContent = () => {
@@ -28,13 +40,85 @@ export default function App() {
 
   const handleShowCharts = () => {
     setShowCharts(true)
-    setTimeout(scrollToContent, 50) // Pequeño delay para asegurar que el DOM actualice
+    setShowTestimonials(false)
+    setTimeout(scrollToContent, 50)
   }
 
   const handleHideCharts = () => {
     setShowCharts(false)
+    setShowTestimonials(false)
     setTimeout(scrollToContent, 50)
   }
+
+  const handleShowTestimonials = () => {
+    setShowCharts(false)
+    setShowTestimonials(true)
+    setTimeout(scrollToContent, 50)
+  }
+
+  // Aquí defines los testimonios que quieres mostrar
+  const testimonios = [
+    {
+      nombre: "Ahmed",
+      descripcion: "Perdí mi casa y mi escuela durante los bombardeos...",
+      imgSrc: foto3,
+    },
+    {
+      nombre: "Fatima",
+      descripcion: "Mis hijos no pueden salir a jugar, viven con miedo constante...",
+      imgSrc: foto2,
+    },
+    {
+      nombre: "Yusuf",
+      descripcion: "Vemos hospitales colapsar y no hay acceso a medicinas...",
+      imgSrc: foto1,
+    },
+    {
+      nombre: "Layla",
+      descripcion: "Cada noche tememos por nuestra vida y no sabemos si amaneceremos...",
+      imgSrc: foto4,
+    },
+    {
+      nombre: "Omar",
+      descripcion: "El agua y la electricidad son un lujo que ya no podemos garantizar...",
+      imgSrc: foto8,
+    },
+    {
+      nombre: "Amina",
+      descripcion: "Mi familia se ha visto obligada a dormir en refugios improvisados...",
+      imgSrc: foto5,
+    },
+    {
+      nombre: "Khalid",
+      descripcion: "He perdido amigos y vecinos en los ataques, es un dolor constante...",
+      imgSrc: foto6,
+    },
+    {
+      nombre: "Nadia",
+      descripcion: "No puedo enviar a mis hijos a la escuela, temo por su seguridad...",
+      imgSrc: foto7,
+    },
+    {
+      nombre: "Samir",
+      descripcion: "Los mercados y hospitales están destruidos, la vida diaria es imposible...",
+      imgSrc: foto9,
+    },
+    {
+      nombre: "Hana",
+      descripcion: "Cada día luchamos por sobrevivir, y aún así seguimos esperando un cambio...",
+      imgSrc: foto11,
+    },
+    {
+      nombre: "Tariq",
+      descripcion: "Mis recuerdos de la infancia se han desvanecido entre el miedo y la violencia...",
+      imgSrc: foto10,
+    },
+    {
+      nombre: "Rania",
+      descripcion: "No hay paz, solo incertidumbre. Cada día es un desafío...",
+      imgSrc: foto12,
+    }
+  ]
 
   return (
     <div className={`min-h-screen flex flex-col gap-8 transition-colors duration-500 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
@@ -42,9 +126,9 @@ export default function App() {
       <main className="relative w-full h-full">
         <Hero isDark={isDark} />
 
-        {/* Contenedor del contenido que cambia */}
         <div ref={contentRef}>
-          {!showCharts && (
+          {/* Vista principal con cards */}
+          {!showCharts && !showTestimonials && (
             <>
               <div className="max-w-4xl mx-auto mt-12 px-4 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -62,7 +146,7 @@ export default function App() {
                   imgSrc={palestinaWar}
                   isDark={isDark}
                   actionText="Ver cifras reales"
-                  onClick={handleShowCharts} 
+                  onClick={handleShowCharts}
                 />
                 <CardItem
                   title="Historias que el mundo no debería ignorar"
@@ -70,6 +154,7 @@ export default function App() {
                   imgSrc={kidPalestina}
                   isDark={isDark}
                   actionText="Leer testimonios"
+                  onClick={handleShowTestimonials}
                 />
                 <CardItem
                   title="Tu voz realmente puede marcar la diferencia"
@@ -83,6 +168,7 @@ export default function App() {
             </>
           )}
 
+          {/* Vista de gráficos */}
           {showCharts && (
             <section className="max-w-5xl mx-auto mt-16 px-4 flex flex-col items-center gap-10 animate-fadeIn">
               <h2 className="text-3xl md:text-5xl font-bold text-center">Cifras reales del impacto humanitario</h2>
@@ -112,6 +198,41 @@ export default function App() {
               </button>
             </section>
           )}
+
+          {/* Vista de testimonios */}
+          {showTestimonials && (
+          <section className="max-w-4xl mx-auto mt-16 px-4 flex flex-col items-center gap-10 animate-fadeIn">
+            <h2 className="text-3xl md:text-5xl font-bold text-center mb-8">Testimonios de víctimas</h2>
+
+            <div className="flex flex-col gap-6 w-full">
+              {testimonios.map((t, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-4 bg-muted dark:bg-gray-800 rounded-xl p-4 shadow-md"
+                >
+                  {/* Foto a la izquierda */}
+                  <img
+                    src={t.imgSrc}
+                    alt={t.nombre}
+                    className="w-16 h-16 rounded-full object-cover flex-shrink-0"
+                  />
+
+                  {/* Testimonio a la derecha entre comillas */}
+                  <p className="text-lg md:text-xl italic leading-relaxed text-gray-800 dark:text-gray-200">
+                    “{t.descripcion}”
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={handleHideCharts}
+              className={`mt-10 px-6 py-3 rounded-xl transition-all ${isDark ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"}`}
+            >
+              ← Volver
+            </button>
+          </section>
+        )}
         </div>
 
         <div className="h-20"></div>
