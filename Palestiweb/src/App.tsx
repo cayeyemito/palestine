@@ -51,7 +51,7 @@ export default function App() {
     if (token) {
       const confirmSubscription = async () => {
         try {
-          const res = await fetch(`http://palestine-fawn.vercel.app/api/confirm?token=${token}`);
+          const res = await fetch(`https://palestine-fawn.vercel.app/api/confirm?token=${token}`);
           if (res.ok) {
             console.log("✅ Suscripción confirmada con éxito!");
           } else {

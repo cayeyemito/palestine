@@ -104,4 +104,4 @@ app.get("/api/confirm", async (req, res) => {
   }
 })
 
-app.listen(3000, () => console.log("Backend corriendo en http://palestine-fawn.vercel.app"))
+app.listen(3000, () => console.log("Backend corriendo en https://palestine-fawn.vercel.app"))
