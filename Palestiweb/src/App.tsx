@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Header } from "@/components/Header"
 import { Hero } from "@/components/Hero"
 import { CardItem } from "@/components/CardItem"
@@ -10,9 +10,6 @@ import InfrastructureChart from "@/components/InfrastructureChart"
 import CarouselDApiDemo from "@/components/Carousel"
 import Footer from "@/components/footer"
 import { SubscriptionForm } from "@/components/suscription-form"
-
-import { useState, useEffect } from 'react'
-import supabase from '../utils/supabase'
 
 import palestinaWar from "@/assets/img/palestinawar.webp"
 import kidPalestina from "@/assets/img/kidpalestina.jpg"
@@ -30,33 +27,43 @@ import foto10 from "@/assets/img/foto10.jpg"
 import foto11 from "@/assets/img/foto11.jpg"
 import foto12 from "@/assets/img/foto12.jpg"
 
+interface Subscriber {
+  id: string
+  email: string
+  confirmed?: boolean
+  subscribed_at?: string
+}
+
 export default function App() {
   const { theme } = useTheme()
   const isDark = theme === "dark"
-  const [showCharts, setShowCharts] = React.useState(false)
-  const [showTestimonials, setShowTestimonials] = React.useState(false)
-  const [todos, setTodos] = useState<any[]>([])
 
-  useEffect(() => {
-    async function getSubscribers() {
-      const { data: subscribers, error } = await supabase.from('subscribers').select()
-      if (error) {
-        console.error("❌ Error al obtener suscriptores:", error)
-        return
-      }
-
-      if (subscribers && subscribers.length > 0) {
-        console.log("✅ Suscriptores obtenidos:", subscribers)
-        setTodos(subscribers)
-      } else {
-        console.log("⚠️ No hay suscriptores registrados todavía.")
-      }
-    }
-
-    getSubscribers()
-  }, [])
+  const [showCharts, setShowCharts] = useState(false)
+  const [showTestimonials, setShowTestimonials] = useState(false)
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([])
 
   const contentRef = useRef<HTMLDivElement | null>(null)
+
+  // 🔹 Nuevo useEffect para confirmar suscripción desde el token en la URL
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const token = url.searchParams.get("token");
+    if (token) {
+      const confirmSubscription = async () => {
+        try {
+          const res = await fetch(`http://localhost:3000/api/confirm?token=${token}`);
+          if (res.ok) {
+            console.log("✅ Suscripción confirmada con éxito!");
+          } else {
+            console.error("❌ No se pudo confirmar la suscripción");
+          }
+        } catch (err) {
+          console.error("❌ Error confirmando la suscripción:", err);
+        }
+      };
+      confirmSubscription();
+    }
+  }, []);
 
   const scrollToContent = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -261,7 +268,7 @@ export default function App() {
 
         <div className="h-20"></div>
         <CarouselDApiDemo autoPlayDelay={4000} />
-        <SubscriptionForm></SubscriptionForm>
+        <SubscriptionForm onNewSubscriber={(newSub) => setSubscribers([...subscribers, newSub])} />
         <Footer />
       </main>
     </div>

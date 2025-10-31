@@ -1,40 +1,56 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
-export function SubscriptionForm() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+interface SubscriptionFormProps {
+  onNewSubscriber?: (subscriber: { id: string; email: string }) => void
+}
+
+function generateToken() {
+  return crypto.randomUUID() // UUID único
+}
+
+export function SubscriptionForm(props: SubscriptionFormProps) {
+  const [email, setEmail] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    e.preventDefault()
+    setError("")
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setError("Por favor ingresa un email válido.");
-      return;
+      setError("Por favor ingresa un email válido.")
+      return
     }
 
     try {
-      const res = await fetch("/api/subscribe", {
+      const token = generateToken()
+
+      const res = await fetch("http://localhost:3000/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+        body: JSON.stringify({ email, token }),
+      })
 
-      if (res.ok) {
-        setSubmitted(true);
-      } else {
-        setError("Hubo un error al enviar tu email. Intenta de nuevo.");
+      if (!res.ok) {
+        setError("Hubo un error al enviar tu email. Intenta de nuevo.")
+        return
       }
-    } catch (err) {
-      setError("Hubo un error al enviar tu email. Intenta de nuevo.");
-    }
-  };
 
+      const data = await res.json()
+      console.log("Email agregado:", data)
+
+      setSubmitted(true)
+      setEmail("")
+      props.onNewSubscriber?.(data.subscriber)
+    } catch (err) {
+      setError("Hubo un error al enviar tu email. Intenta de nuevo.")
+      console.error(err)
+    }
+  }
 
   return (
     <div className="relative">
@@ -58,10 +74,9 @@ export function SubscriptionForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {error && <span className="t-1">{error}</span>}
+                {error && <span className="text-red-500 mt-1">{error}</span>}
               </div>
 
-              {/* Botón */}
               <Button type="submit" className="w-full md:w-auto mt-2 md:mt-0">
                 Suscribirse
               </Button>
@@ -70,5 +85,5 @@ export function SubscriptionForm() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

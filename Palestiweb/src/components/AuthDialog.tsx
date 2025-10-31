@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { registerUser, loginUser } from "@/components/bbdd"
-import toast from "react-hot-toast" // Opcional: para mostrar notificaciones bonitas
+import toast from "react-hot-toast" 
 
 interface AuthDialogProps {
   type: "login" | "register"
