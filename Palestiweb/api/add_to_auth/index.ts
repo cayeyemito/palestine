@@ -1,6 +1,5 @@
 // /functions/add_to_auth/index.ts
 import { createClient } from "@supabase/supabase-js";
-import crypto from "crypto";
 
 // Cliente Supabase con service_role key (importante que sea privada)
 const supabase = createClient(
@@ -18,11 +17,7 @@ export default async function handler(req: any, res: any) {
     if (!email) return res.status(400).json({ error: "Falta el email" });
 
     // Crear usuario en Supabase Auth
-    const { data, error } = await supabase.auth.admin.createUser({
-      email,
-      password: crypto.randomUUID(),
-      email_confirm: true,
-    });
+    const { data, error } = await supabase.auth.admin.inviteUserByEmail(email);
 
     if (error) {
       console.error("Error creando usuario:", error);
