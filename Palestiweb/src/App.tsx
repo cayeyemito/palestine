@@ -9,6 +9,10 @@ import VictimsByAgeChart from "@/components/VictimsByAgeChart"
 import InfrastructureChart from "@/components/InfrastructureChart"
 import CarouselDApiDemo from "@/components/Carousel"
 import Footer from "@/components/footer"
+import { SubscriptionForm } from "@/components/suscription-form"
+
+import { useState, useEffect } from 'react'
+import supabase from '../utils/supabase'
 
 import palestinaWar from "@/assets/img/palestinawar.webp"
 import kidPalestina from "@/assets/img/kidpalestina.jpg"
@@ -31,6 +35,26 @@ export default function App() {
   const isDark = theme === "dark"
   const [showCharts, setShowCharts] = React.useState(false)
   const [showTestimonials, setShowTestimonials] = React.useState(false)
+  const [todos, setTodos] = useState<any[]>([])
+
+  useEffect(() => {
+    async function getSubscribers() {
+      const { data: subscribers, error } = await supabase.from('subscribers').select()
+      if (error) {
+        console.error("❌ Error al obtener suscriptores:", error)
+        return
+      }
+
+      if (subscribers && subscribers.length > 0) {
+        console.log("✅ Suscriptores obtenidos:", subscribers)
+        setTodos(subscribers)
+      } else {
+        console.log("⚠️ No hay suscriptores registrados todavía.")
+      }
+    }
+
+    getSubscribers()
+  }, [])
 
   const contentRef = useRef<HTMLDivElement | null>(null)
 
@@ -208,7 +232,7 @@ export default function App() {
               {testimonios.map((t, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-4 bg-muted dark:bg-gray-800 rounded-xl p-4 shadow-md"
+                  className="flex items-start gap-4 bg-muted dark:bg-gray-1000 rounded-xl p-4 shadow-md"
                 >
                   {/* Foto a la izquierda */}
                   <img
@@ -237,6 +261,7 @@ export default function App() {
 
         <div className="h-20"></div>
         <CarouselDApiDemo autoPlayDelay={4000} />
+        <SubscriptionForm></SubscriptionForm>
         <Footer />
       </main>
     </div>

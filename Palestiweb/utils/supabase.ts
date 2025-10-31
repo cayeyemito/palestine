@@ -1,12 +1,8 @@
-// supabase.ts
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
-// Accede a las variables de entorno de Vite
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error("Faltan variables de entorno de Supabase");
-}
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export default supabase

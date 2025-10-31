@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@radix-ui/react-toast": "^1.2.15",
-    "react-hot-toast": "^2.6.0"
-  }
-}

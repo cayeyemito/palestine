@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-neutral-900 text-gray-200 py-10 mt-16">
+    <footer className="w-full bg-neutral-900 text-gray-200 py-10">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         
         {/* Sección izquierda */}
