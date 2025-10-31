@@ -55,8 +55,17 @@ app.post("/api/subscribe", async (req, res) => {
         <p style="color: #555; font-size: 16px; line-height: 1.5;">
           Hemos recibido tu solicitud de suscripción. Para confirmar que realmente deseas recibir nuestras noticias y actualizaciones, haz click en el botón de abajo:
         </p>
-        <a href="${confirmUrl}" 
-          style="display: inline-block; margin: 20px 0; padding: 12px 24px; background-color: #007bff; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">
+        <a href="${confirmUrl} target="_blank" "
+          style="
+            background-color:#007bff;
+            color:#ffffff;
+            text-decoration:none;
+            padding:12px 24px;
+            font-weight:bold;
+            border-radius:6px;
+            display:inline-block;
+          "
+        >
           Confirmar suscripción
         </a>
         <p style="color: #555; font-size: 14px;">Si no puedes hacer click en el botón, copia y pega esta URL en tu navegador:</p>
