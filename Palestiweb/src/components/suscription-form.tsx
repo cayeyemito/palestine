@@ -29,7 +29,7 @@ export function SubscriptionForm(props: SubscriptionFormProps) {
     try {
       const token = generateToken()
 
-      const res = await fetch("http://localhost:3000/api/subscribe", {
+      const res = await fetch("http://palestine-fawn.vercel.app/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, token }),
